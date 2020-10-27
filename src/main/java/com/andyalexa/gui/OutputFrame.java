@@ -1,16 +1,19 @@
 package com.andyalexa.gui;
 
+import com.andyalexa.exchangerates.ExchangeAPI;
 import com.andyalexa.thirdparty.TextAreaOutputStream;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.io.PrintStream;
 
 public class OutputFrame extends JFrame implements ActionListener {
 
-    public OutputFrame() throws InterruptedException{
+    public OutputFrame(int year) throws IOException {
+        this.setTitle("Exchange Rates - Alexa Andy 2020");
         this.add( new JLabel(" Output" ), BorderLayout.NORTH );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -27,6 +30,7 @@ public class OutputFrame extends JFrame implements ActionListener {
         this.setVisible( true );
         this.setSize(800,600);
 
+        ExchangeAPI.printRatesForYear(year);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
