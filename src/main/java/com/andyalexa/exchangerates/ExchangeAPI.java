@@ -7,7 +7,10 @@ import java.net.http.HttpResponse;
 
 public class ExchangeAPI {
 
-    public static String getJsonString(String startDate, String endDate) {
+    public static String getJsonString(int year) {
+
+        String startDate = year + "-01-01";
+        String endDate = (year + 1) + "-01-01";
 
         String urlString = "https://api.exchangeratesapi.io/history?start_at=" + startDate + "&end_at=" + endDate + "&symbols=RON&base=EUR";
         HttpClient client = HttpClient.newHttpClient();

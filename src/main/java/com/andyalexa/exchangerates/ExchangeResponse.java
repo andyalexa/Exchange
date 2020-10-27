@@ -1,8 +1,8 @@
-package com.andyalexa.jsonparsing.pojo;
+package com.andyalexa.exchangerates;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class ResponsePOJO {
+public class ExchangeResponse {
 
     private JsonNode rates;
     private String start_at;
