@@ -1,11 +1,13 @@
 package com.andyalexa.jsonparsing;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.Map;
 
 
 public class Json {
@@ -22,7 +24,8 @@ public class Json {
         return objectMapper.readTree(source);
     }
 
-    public static <T> T fromJson(JsonNode node, Class<T> c) throws JsonProcessingException {
-        return objectMapper.treeToValue(node, c);
+    // Returns a map of dates and rates for said dates
+    public static Map<String, JsonNode> getMapFromNode(JsonNode node) throws  JsonProcessingException {
+       return objectMapper.convertValue(node, new TypeReference<Map<String, JsonNode>>(){});
     }
 }

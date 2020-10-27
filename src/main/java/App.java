@@ -1,9 +1,9 @@
 import com.andyalexa.exchangerates.ExchangeAPI;
-import com.andyalexa.exchangerates.ExchangeResponse;
 import com.andyalexa.jsonparsing.Json;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class App {
@@ -16,9 +16,13 @@ public class App {
         int year = scanner.nextInt();
 
         JsonNode node = Json.parse(ExchangeAPI.getJsonString(year));
-        ExchangeResponse test = Json.fromJson(node, ExchangeResponse.class);
 
-        System.out.println(test.getRates());
+        // ExchangeResponse response = Json.fromJson(node, ExchangeResponse.class);
+        //System.out.println(response.getRates().toPrettyString());
+
+        Map<String, JsonNode> rates = Json.getMapFromNode(node.get("rates"));
+
+        rates.forEach((k,v) -> System.out.println("Date:" + k + " Value: " + v.get("RON")));
     }
 
 
