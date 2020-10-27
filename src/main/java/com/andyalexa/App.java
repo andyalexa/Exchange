@@ -1,3 +1,5 @@
+package com.andyalexa;
+
 import com.andyalexa.exchangerates.ExchangeAPI;
 import com.andyalexa.jsonparsing.Json;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,15 +12,10 @@ import java.util.TreeMap;
 
 public class App {
 
-
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Vă rugăm introduceți anul: ");
+        System.out.println("Va rugam introduceti anul: ");
         int year = scanner.nextInt();
 
         // Date formatting
@@ -32,15 +29,10 @@ public class App {
         double startRate = rates.firstEntry().getValue().get("RON").asDouble();
 
         rates.forEach((k,v) -> {
-                    String color = ANSI_WHITE;
+                    double currentRate = v.get("RON").asDouble();
+                    double difference = currentRate - startRate;
 
-
-                    if (v.get("RON").asDouble() > startRate) {
-                        color = ANSI_GREEN;
-                    } else if (v.get("RON").asDouble() < startRate) {
-                        color = ANSI_RED;
-                    }
-                    System.out.println(color + "Data: " + simpleDateFormat.format(k) + " Rată: " + v.get("RON"));
+                    System.out.println(simpleDateFormat.format(k) + " -> " + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]" );
         });
 
     }
