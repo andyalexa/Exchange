@@ -1,19 +1,19 @@
 package com.andyalexa.jsonparsing.pojo;
 
-import java.util.Map;
+import com.fasterxml.jackson.databind.JsonNode;
 
 public class ResponsePOJO {
 
-    private Map<String, RatePOJO> rates;
+    private JsonNode rates;
     private String start_at;
     private String base;
     private String end_at;
 
-    public Map<String, RatePOJO> getRates() {
+    public JsonNode getRates() {
         return rates;
     }
 
-    public void setRates(Map<String, RatePOJO> rates) {
+    public void setRates(JsonNode rates) {
         this.rates = rates;
     }
 
