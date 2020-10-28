@@ -32,42 +32,47 @@ public class ExchangeAPI {
     public static void printRatesForYear(String base, String symbol, int year, boolean checkAgainstStartRate, boolean showOperations) throws IOException {
         // Store rate information in a Map
         JsonNode node = Json.parse(ExchangeAPI.getJsonString(year, base, symbol));
+
         TreeMap<Date, JsonNode> rates = Json.getMapFromNode(node.get("rates"));
 
-        // Date formatting
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        if (rates != null) {
+            // Date formatting
+            String pattern = "yyyy-MM-dd";
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        double startRate = rates.firstEntry().getValue().get(symbol).asDouble();
-        double lastRate = startRate;
+            double startRate = rates.firstEntry().getValue().get(symbol).asDouble();
+            double lastRate = startRate;
 
-        // Check how many times the base currency has increased or decreased
-        int nIncrease = 0;
-        int nDecrease = 0;
+            // Check how many times the base currency has increased or decreased
+            int nIncrease = 0;
+            int nDecrease = 0;
 
-        for (Map.Entry<Date, JsonNode> entry : rates.entrySet()) {
-            Date k = entry.getKey();
-            JsonNode v = entry.getValue();
+            for (Map.Entry<Date, JsonNode> entry : rates.entrySet()) {
+                Date k = entry.getKey();
+                JsonNode v = entry.getValue();
 
-            double currentRate = v.get(symbol).asDouble();
-            double difference = checkAgainstStartRate ? startRate - currentRate : currentRate - lastRate;
+                double currentRate = v.get(symbol).asDouble();
+                double difference = checkAgainstStartRate ? startRate - currentRate : currentRate - lastRate;
 
-            if (difference > 0.0) {
-                nIncrease++;
-            } else if (difference < 0.0) {
-                nDecrease++;
+                if (difference > 0.0) {
+                    nIncrease++;
+                } else if (difference < 0.0) {
+                    nDecrease++;
+                }
+
+                if (showOperations) {
+                    System.out.println("("+ simpleDateFormat.format(k) + ") 1,0000 " + base + " -> " + symbol + " " + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]");
+                }
+
+                lastRate = currentRate;
             }
 
-            if (showOperations) {
-                System.out.println("("+ simpleDateFormat.format(k) + ") 1,0000 " + base + " -> " + symbol + " " + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]");
-            }
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("In anul " + year + " " + base + " in raport cu " + symbol + " a crescut de " + nIncrease + " ori " + "si a scazut de " + nDecrease + " ori.");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------");
 
-            lastRate = currentRate;
+        } else {
+            System.out.println("Nu exista date pentru optiunile selectate!");
         }
-
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------");
-        System.out.println("In anul " + year + " " + base + " in raport cu " + symbol + " a crescut de " + nIncrease + " ori " + "si a scazut de " + nDecrease + " ori.");
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------");
-
     }
 }

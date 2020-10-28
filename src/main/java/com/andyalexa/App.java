@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class App {
 
-    public static final int START_YEAR = 2006;
+    public static final int START_YEAR = 1999;
     public static final int END_YEAR = Calendar.getInstance().get(Calendar.YEAR);
     public static final String[] SYMBOLS = {"CAD",
             "HKD",
