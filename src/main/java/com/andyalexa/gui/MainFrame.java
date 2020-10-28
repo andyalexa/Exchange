@@ -9,6 +9,7 @@ import java.io.IOException;
 public class MainFrame extends JFrame implements ActionListener{
 
     JButton button;
+    JLabel label;
     JTextField textField;
 
 
@@ -17,18 +18,22 @@ public class MainFrame extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
-        JLabel label = new JLabel("Vă rugăm introduceți anul:");
-        button = new JButton("Afișează");
-        button.addActionListener(this);
+        label = new JLabel("Vă rugăm introduceți anul:");
 
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(66,27));
         textField.setFont(new Font("Consolas", Font.PLAIN, 17));
 
-        this.add(textField);
+        button = new JButton("Afișează");
+        button.addActionListener(this);
+
+
         this.add(label);
+        this.add(textField);
         this.add(button);
         this.pack();
+        this.setSize(new Dimension(400,85));
+        this.setResizable(false);
         this.setVisible(true);
     }
 
@@ -39,7 +44,7 @@ public class MainFrame extends JFrame implements ActionListener{
                 int year  = Integer.parseInt(textField.getText());
                 try {
                     this.dispose();
-                    OutputFrame outputFrame = new OutputFrame(year);
+                    new OutputFrame(year);
                 } catch (IOException ie) {
                     ie.printStackTrace();
                 }

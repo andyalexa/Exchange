@@ -1,6 +1,6 @@
 package com.andyalexa.gui;
 
-import com.andyalexa.exchangerates.ExchangeAPI;
+import com.andyalexa.ExchangeAPI;
 import com.andyalexa.thirdparty.TextAreaOutputStream;
 
 import javax.swing.*;
@@ -27,11 +27,12 @@ public class OutputFrame extends JFrame implements ActionListener {
         this.add( new JScrollPane( ta )  );
 
         this.pack();
-        this.setVisible( true );
         this.setSize(800,600);
 
         ExchangeAPI.printRatesForYear(year);
+        this.setVisible( true );
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
 

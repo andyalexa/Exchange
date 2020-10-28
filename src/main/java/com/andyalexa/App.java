@@ -1,4 +1,5 @@
-import com.andyalexa.exchangerates.ExchangeAPI;
+package com.andyalexa;
+
 import com.andyalexa.gui.MainFrame;
 
 
@@ -9,14 +10,14 @@ public class App {
 
     public static void main(String[] args) throws IOException {
 
-        if (args.length == 0) {
+        if (args.length > 0) {
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Va rugam introduceti anul: ");
             int year = scanner.nextInt();
 
             ExchangeAPI.printRatesForYear(year);
-        } else {
+        } else  {
             new MainFrame();
         }
 

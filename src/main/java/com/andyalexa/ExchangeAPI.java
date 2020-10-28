@@ -1,6 +1,5 @@
-package com.andyalexa.exchangerates;
+package com.andyalexa;
 
-import com.andyalexa.jsonparsing.Json;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.IOException;
