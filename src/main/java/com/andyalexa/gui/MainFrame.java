@@ -28,7 +28,10 @@ public class MainFrame extends JFrame implements ActionListener{
         textField.setPreferredSize(new Dimension(66,27));
         textField.setFont(new Font("Consolas", Font.PLAIN, 17));
 
-        String[] options = {"Afisează diferența in comparație cu rata de început", "Afișează diferența succesivă"};
+        String[] options = {"Afișează rezultatul și operațiile",
+                            "Afisează rezultatul fără operații",
+                            "Afișează diferența dintre rata zilnică și cea inițială"};
+
         button = new JButton("Ok");
         button.addActionListener(this);
 
@@ -60,21 +63,22 @@ public class MainFrame extends JFrame implements ActionListener{
                 try {
                     int year  = Integer.parseInt(textField.getText());
                     if (year >= App.START_YEAR && year < App.END_YEAR + 1) {
-                        boolean checkAgainstStartRate = option == 0;
+                        boolean checkAgainstStartRate = option == 2;
+                        boolean showOperations = option == 0;
 
                         if (!base.equals(symbol)) {
                             this.dispose();
-                            new OutputFrame(base, symbol, year, checkAgainstStartRate);
+                            new OutputFrame(base, symbol, year, checkAgainstStartRate, showOperations);
                         } else {
-                            JOptionPane.showMessageDialog(this, "Selecteaza doua perechi de monezi diferite!");
+                            JOptionPane.showMessageDialog(this, "Selectează două perechi de monezi diferite!");
                         }
                     } else {
                         textField.setText("");
-                        JOptionPane.showMessageDialog(this, "Anul trebuie sa fie intre " + App.START_YEAR + " si " + App.END_YEAR + "!");
+                        JOptionPane.showMessageDialog(this, "Anul trebuie sa fie între " + App.START_YEAR + " și " + App.END_YEAR + "!");
                     }
                 } catch (NumberFormatException | IOException ex) {
                     textField.setText("");
-                    JOptionPane.showMessageDialog(this, "Va rugam introduceti o valoare corecta!");
+                    JOptionPane.showMessageDialog(this, "Va rugăm introduceti o valoare corectă!");
                 }
         }
     }

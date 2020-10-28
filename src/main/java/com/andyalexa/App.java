@@ -68,13 +68,16 @@ public class App {
             int option;
             while (true) {
                 System.out.println("Va rugam selectati o optiune:");
-                System.out.println("1. Afiseaza diferenta succesiva");
-                System.out.println("2. Afiseaza diferenta in comparatie cu rata de inceput");
+                System.out.println("---------------------------------------------------------");
+                System.out.println("1. Afiseaza rezultatul si operatiile");
+                System.out.println("2. Afiseaza rezultatul fara operatii");
+                System.out.println("3. Afiseaza diferenta dintre rata zilnica si cea initiala");
+
 
                 String input = scanner.next();
                 try {
                     option = Integer.parseInt(input);
-                    if (option == 1 || option == 2) {
+                    if (option >= 1  && option < 4) {
                         break;
                     }
                 } catch (NumberFormatException ne) {
@@ -86,9 +89,10 @@ public class App {
             String symbol = Utility.getCurrency(scanner, "Va rugam selectati moneda de comparatie");
 
 
-            boolean checkAgainstStartRate = option != 1;
+            boolean showOperations = option == 1;
+            boolean checkAgainstStartRate = option == 3;
 
-            ExchangeAPI.printRatesForYear(base, symbol, year, checkAgainstStartRate);
+            ExchangeAPI.printRatesForYear(base, symbol, year, checkAgainstStartRate, showOperations);
         } else  {
             new MainFrame();
         }

@@ -14,7 +14,7 @@ public class OutputFrame extends JFrame implements ActionListener {
 
     JButton button;
 
-    public OutputFrame(String base, String symbol, int year, boolean checkAgainstStartRate) throws IOException {
+    public OutputFrame(String base, String symbol, int year, boolean checkAgainstStartRate, boolean showOperations) throws IOException {
         this.setTitle("Exchange Rates - Alexa Andy 2020");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -33,7 +33,7 @@ public class OutputFrame extends JFrame implements ActionListener {
         this.setSize(800,600);
         this.setLocationRelativeTo(null);
 
-        ExchangeAPI.printRatesForYear(base, symbol, year, checkAgainstStartRate);
+        ExchangeAPI.printRatesForYear(base, symbol, year, checkAgainstStartRate, showOperations);
         this.setVisible( true );
     }
 
