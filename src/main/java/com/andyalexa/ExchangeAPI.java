@@ -9,6 +9,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.TreeMap;
 
 public class ExchangeAPI {
@@ -28,7 +29,7 @@ public class ExchangeAPI {
 
     }
 
-    public static void printRatesForYear(int year) throws IOException {
+    public static void printRatesForYear(int year, boolean checkAgainstStartRate) throws IOException {
         // Store rate information in a Map
         JsonNode node = Json.parse(ExchangeAPI.getJsonString(year));
         TreeMap<Date, JsonNode> rates = Json.getMapFromNode(node.get("rates"));
@@ -38,12 +39,18 @@ public class ExchangeAPI {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
         double startRate = rates.firstEntry().getValue().get("RON").asDouble();
+        double lastRate = startRate;
 
-        rates.forEach((k,v) -> {
+        for (Map.Entry<Date, JsonNode> entry : rates.entrySet()) {
+            Date k = entry.getKey();
+            JsonNode v = entry.getValue();
+
             double currentRate = v.get("RON").asDouble();
-            double difference = currentRate - startRate;
+            double difference = checkAgainstStartRate ? currentRate - startRate : currentRate - lastRate;
 
-            System.out.println(simpleDateFormat.format(k) + " -> RON:" + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]" );
-        });
+            System.out.println(simpleDateFormat.format(k) + " 1 EUR -> RON:" + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]");
+
+            lastRate = currentRate;
+        }
     }
 }

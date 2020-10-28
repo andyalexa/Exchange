@@ -11,7 +11,7 @@ import java.io.PrintStream;
 
 public class OutputFrame extends JFrame implements ActionListener {
 
-    public OutputFrame(int year) throws IOException {
+    public OutputFrame(int year, boolean checkAgainstStartRate) throws IOException {
         this.setTitle("Exchange Rates - Alexa Andy 2020");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -28,7 +28,7 @@ public class OutputFrame extends JFrame implements ActionListener {
         this.setSize(800,600);
         this.setLocationRelativeTo(null);
 
-        ExchangeAPI.printRatesForYear(year);
+        ExchangeAPI.printRatesForYear(year, checkAgainstStartRate);
         this.setVisible( true );
     }
 
