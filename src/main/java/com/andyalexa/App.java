@@ -12,18 +12,19 @@ public class App {
 
         if (args.length > 0 && args[0].contains("no_gui")) {
             Scanner scanner = new Scanner(System.in);
-
             int year;
 
             while (true) {
-                System.out.println("Va rugam introduceti anul: ");
+                System.out.println("Va rugam introduceti anul (1999-2020): ");
 
                 String input = scanner.next();
                 try {
                     year = Integer.parseInt(input);
-                    break;
+                    if (year >= 1999 && year < 2021) {
+                        break;
+                    }
                 } catch (NumberFormatException ne) {
-                    System.out.println("Eroare, acesta nu este un numar valid!");
+                    System.out.println("Va rugam introduceti o valoare corecta!");
                 }
            }
 

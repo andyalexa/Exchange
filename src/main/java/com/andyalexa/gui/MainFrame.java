@@ -18,7 +18,7 @@ public class MainFrame extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
-        label = new JLabel("Vă rugăm introduceți anul:");
+        label = new JLabel("Vă rugăm introduceți anul (1999-2020):");
 
         textField = new JTextField();
         textField.setPreferredSize(new Dimension(66,27));
@@ -33,6 +33,7 @@ public class MainFrame extends JFrame implements ActionListener{
         this.add(button);
         this.pack();
         this.setSize(new Dimension(400,85));
+        this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.setVisible(true);
     }
@@ -40,15 +41,19 @@ public class MainFrame extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == button) {
-            if(textField.isValid()) {
-                int year  = Integer.parseInt(textField.getText());
                 try {
-                    this.dispose();
-                    new OutputFrame(year);
-                } catch (IOException ie) {
-                    ie.printStackTrace();
+                    int year  = Integer.parseInt(textField.getText());
+                    if (year >= 1999 && year < 2021) {
+                        this.dispose();
+                        new OutputFrame(year);
+                    } else {
+                        textField.setText("");
+                        JOptionPane.showMessageDialog(this, "Anul trebuie sa fie intre 1999 si 2020");
+                    }
+                } catch (NumberFormatException | IOException ex) {
+                   textField.setText("");
+                    JOptionPane.showMessageDialog(this, "Va rugam introduceti o valoare corecta!");
                 }
-            }
         }
     }
 }

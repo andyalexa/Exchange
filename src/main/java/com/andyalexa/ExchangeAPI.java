@@ -43,7 +43,7 @@ public class ExchangeAPI {
             double currentRate = v.get("RON").asDouble();
             double difference = currentRate - startRate;
 
-            System.out.println(simpleDateFormat.format(k) + " -> " + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]" );
+            System.out.println(simpleDateFormat.format(k) + " -> RON:" + String.format("%.04f", currentRate) + " [" + String.format("%.04f", difference) + "]" );
         });
     }
 }

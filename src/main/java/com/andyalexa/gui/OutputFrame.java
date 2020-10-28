@@ -4,7 +4,6 @@ import com.andyalexa.ExchangeAPI;
 import com.andyalexa.thirdparty.TextAreaOutputStream;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,7 +13,6 @@ public class OutputFrame extends JFrame implements ActionListener {
 
     public OutputFrame(int year) throws IOException {
         this.setTitle("Exchange Rates - Alexa Andy 2020");
-        this.add( new JLabel(" Output" ), BorderLayout.NORTH );
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTextArea ta = new JTextArea();
@@ -28,6 +26,7 @@ public class OutputFrame extends JFrame implements ActionListener {
 
         this.pack();
         this.setSize(800,600);
+        this.setLocationRelativeTo(null);
 
         ExchangeAPI.printRatesForYear(year);
         this.setVisible( true );
