@@ -82,9 +82,13 @@ public class App {
                 }
             }
 
+            String base = Utility.getCurrency(scanner, "Va rugam selectati moneda de baza");
+            String symbol = Utility.getCurrency(scanner, "Va rugam selectati moneda de comparatie");
+
+
             boolean checkAgainstStartRate = option != 1;
 
-            ExchangeAPI.printRatesForYear(year, checkAgainstStartRate);
+            ExchangeAPI.printRatesForYear(base, symbol, year, checkAgainstStartRate);
         } else  {
             new MainFrame();
         }

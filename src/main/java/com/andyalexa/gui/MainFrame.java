@@ -60,15 +60,20 @@ public class MainFrame extends JFrame implements ActionListener{
                 try {
                     int year  = Integer.parseInt(textField.getText());
                     if (year >= App.START_YEAR && year < App.END_YEAR + 1) {
-                        this.dispose();
-                        boolean checkAgainstStartRate = option == 0 ? true : false;
-                        new OutputFrame(base, symbol, year, checkAgainstStartRate);
+                        boolean checkAgainstStartRate = option == 0;
+
+                        if (!base.equals(symbol)) {
+                            this.dispose();
+                            new OutputFrame(base, symbol, year, checkAgainstStartRate);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Selecteaza doua perechi de monezi diferite!");
+                        }
                     } else {
                         textField.setText("");
                         JOptionPane.showMessageDialog(this, "Anul trebuie sa fie intre " + App.START_YEAR + " si " + App.END_YEAR + "!");
                     }
                 } catch (NumberFormatException | IOException ex) {
-                   textField.setText("");
+                    textField.setText("");
                     JOptionPane.showMessageDialog(this, "Va rugam introduceti o valoare corecta!");
                 }
         }
