@@ -11,6 +11,39 @@ public class App {
 
     public static final int START_YEAR = 2006;
     public static final int END_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    public static final String[] SYMBOLS = {"CAD",
+            "HKD",
+            "ISK",
+            "PHP",
+            "DKK",
+            "HUF",
+            "CZK",
+            "AUD",
+            "RON",
+            "SEK",
+            "IDR",
+            "INR",
+            "BRL",
+            "RUB",
+            "HRK",
+            "JPY",
+            "THB",
+            "CHF",
+            "SGD",
+            "PLN",
+            "BGN",
+            "TRY",
+            "CNY",
+            "NOK",
+            "NZD",
+            "ZAR",
+            "USD",
+            "MXN",
+            "ILS",
+            "GBP",
+            "KRW",
+            "MYR",
+            "EUR"};
 
     public static void main(String[] args) throws IOException {
 

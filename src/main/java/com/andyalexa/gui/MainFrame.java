@@ -14,6 +14,8 @@ public class MainFrame extends JFrame implements ActionListener{
     JLabel label;
     JTextField textField;
     JComboBox comboBox;
+    JComboBox baseComboBox;
+    JComboBox symbolComboBox;
 
     public MainFrame() {
         this.setTitle("Exchange Rates - Alexa Andy 2020");
@@ -31,9 +33,16 @@ public class MainFrame extends JFrame implements ActionListener{
         button.addActionListener(this);
 
         comboBox = new JComboBox(options);
+        baseComboBox = new JComboBox(App.SYMBOLS);
+        symbolComboBox = new JComboBox(App.SYMBOLS);
+
+        baseComboBox.setSelectedItem("EUR");
+        symbolComboBox.setSelectedItem("RON");
 
         this.add(label);
         this.add(textField);
+        this.add(baseComboBox);
+        this.add(symbolComboBox);
         this.add(comboBox);
         this.add(button);
         this.pack();
@@ -46,12 +55,14 @@ public class MainFrame extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e){
         if(e.getSource() == button) {
                 int option = comboBox.getSelectedIndex();
+                String base = baseComboBox.getSelectedItem().toString();
+                String symbol = symbolComboBox.getSelectedItem().toString();
                 try {
                     int year  = Integer.parseInt(textField.getText());
                     if (year >= App.START_YEAR && year < App.END_YEAR + 1) {
                         this.dispose();
                         boolean checkAgainstStartRate = option == 0 ? true : false;
-                        new OutputFrame(year, checkAgainstStartRate);
+                        new OutputFrame(base, symbol, year, checkAgainstStartRate);
                     } else {
                         textField.setText("");
                         JOptionPane.showMessageDialog(this, "Anul trebuie sa fie intre " + App.START_YEAR + " si " + App.END_YEAR + "!");
